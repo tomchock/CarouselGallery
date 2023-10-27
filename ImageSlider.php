@@ -54,28 +54,35 @@
 
 
 
-<?php
-$cartella = "imgs/";
-$immagini = [];
+<?php 
+//LETTURA CARTELLE
+function readFolder($cartella)
+{
+    $imgsList = [];
+    // apre la dir
+    $dir = opendir($cartella);
 
-// apre la dir
-$dir = opendir($cartella);
-
-// legge i file nella cartella
-while (($file = readdir($dir)) !== false) {
-    // verifica l'estensione
-    if (pathinfo($file, PATHINFO_EXTENSION) == "jpg" || pathinfo($file, PATHINFO_EXTENSION) == "jpeg" || pathinfo($file, PATHINFO_EXTENSION) == "png") {
-        $immagini[] = $cartella . $file;
+    // legge i file nella cartella
+    while (($file = readdir($dir)) !== false) {
+        // verifica l'estensione
+        if (pathinfo($file, PATHINFO_EXTENSION) == "jpg" || pathinfo($file, PATHINFO_EXTENSION) == "jpeg" || pathinfo($file, PATHINFO_EXTENSION) == "png") {
+            $imgsList[] = $cartella . '/' . $file;
+        }
     }
+    // chiude la dir
+    closedir($dir);
+    return $imgsList;
 }
 
-// chiude la dir
-closedir($dir);
-
-
-
+// Esempio di utilizzo per Cartella1
+$folder1 = "imgs/folder1";
+$imgsFolder1 = readFolder($folder1);
 ?>
 
+
+<script>
+    var folder1 = <?php echo json_encode($imgsFolder1); ?>;
+</script>
 
 <script>
     let imgs = <?php echo json_encode($immagini); ?>;
