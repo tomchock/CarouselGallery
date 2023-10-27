@@ -81,11 +81,10 @@ $imgsFolder1 = readFolder($folder1);
 
 
 <script>
-    var folder1 = <?php echo json_encode($imgsFolder1); ?>;
+    var imgs = <?php echo json_encode($imgsFolder1); ?>;
 </script>
 
 <script>
-    let imgs = <?php echo json_encode($immagini); ?>;
     let indice = 1;
     const img = document.querySelector("img");
     img.src = imgs[indice]
